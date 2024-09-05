@@ -51,6 +51,7 @@
   </distributionManagement>
 
   <properties>
+    <hutool.version>5.8.25</hutool.version>
     <gt.version>32-SNAPSHOT</gt.version>
     <jts.version>1.19.0</jts.version>
     <jaiext.version>1.1.26</jaiext.version>
@@ -102,6 +103,11 @@
 
   <dependencyManagement>
     <dependencies>
+      <dependency>
+        <groupId>cn.hutool</groupId>
+        <artifactId>hutool-all</artifactId>
+        <version>${hutool.version}</version>
+      </dependency>
       <dependency>
         <groupId>org.geowebcache</groupId>
         <artifactId>gwc-core</artifactId>
