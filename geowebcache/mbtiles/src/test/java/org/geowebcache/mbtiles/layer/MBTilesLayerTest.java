@@ -74,6 +74,7 @@ public class MBTilesLayerTest {
 
     protected TileLayerConfiguration config;
 
+    // TODO-hyy MBTilesLayerTest执行流程 1. 单元测试执行之前
     @Before
     public void setUpTestUnit() throws Exception {
         config = getConfig();
@@ -87,7 +88,7 @@ public class MBTilesLayerTest {
         makeConfigFile();
         return getConfig(extensions);
     }
-    // TODO-hyy Mbtiles测试数据配置文件
+    // TODO-hyy MBTilesLayerTest执行流程 10. 构造配置文件
     private void makeConfigFile() throws Exception {
         if (configFile == null) {
             configDir = temp.getRoot();
@@ -127,7 +128,7 @@ public class MBTilesLayerTest {
     }
 
     TestXMLConfigurationSource configSource = new TestXMLConfigurationSource();
-
+    // TODO-hyy MBTilesLayerTest执行流程 15. 给extension添加XML配置提供者
     private TileLayerConfiguration getConfig(MockWepAppContextRule extensions) throws Exception {
         extensions.addBean(
                 "MBTilesLayerConfigProvider",

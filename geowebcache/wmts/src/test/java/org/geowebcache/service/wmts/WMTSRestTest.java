@@ -108,7 +108,7 @@ public class WMTSRestTest {
         namespaces.put("wmts", "http://www.opengis.net/wmts/1.0");
         XMLUnit.setXpathNamespaceContext(new SimpleNamespaceContext(namespaces));
     }
-
+    // TODO-hyy 测试GetCapanbilities
     @Test
     public void testGetCap() throws Exception {
         MockHttpServletRequest req = new MockHttpServletRequest();

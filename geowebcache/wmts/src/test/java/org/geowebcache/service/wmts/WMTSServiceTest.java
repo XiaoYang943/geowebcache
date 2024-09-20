@@ -110,7 +110,7 @@ public class WMTSServiceTest {
     @Rule public TemporaryFolder temp = new TemporaryFolder();
     private File configDir;
     private File configFile;
-
+    // TODO-hyy GetCapabilities流程 1. 单元测试之前执行
     @Before
     public void setUp() throws Exception {
         sb = mock(StorageBroker.class);
@@ -169,7 +169,7 @@ public class WMTSServiceTest {
             throws Exception {
         return mockTileLayer(layerName, gridSetNames, parameterFilters, true);
     }
-
+    // TODO-hyy 模拟TileLayer
     private TileLayer mockTileLayer(
             String layerName,
             List<String> gridSetNames,

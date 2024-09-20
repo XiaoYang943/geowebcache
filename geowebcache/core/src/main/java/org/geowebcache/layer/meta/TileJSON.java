@@ -18,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.ArrayList;
 import java.util.List;
-
+// TODO-hyy Mapbox-TileJSON对象实现类
 /**
  * Represents a TileJSON v 3.0 object, see also
  * https://github.com/mapbox/tilejson-spec/tree/3.0/3.0.0 (it's a draft of a spec that has explicit

@@ -830,7 +830,7 @@ public class XMLConfiguration
             throw new RuntimeException(e);
         }
     }
-
+    // TODO-hyy MBTilesLayerTest执行流程 25. 初始化图层并更新图层。结束。单元测试获取图层...
     @Override
     public void afterPropertiesSet() throws GeoWebCacheException {
 

@@ -255,7 +255,7 @@ public class WMTSService extends Service {
     public Conveyor getRestConveyor(HttpServletRequest request, HttpServletResponse response)
             throws GeoWebCacheException, OWSException {
         final String path = request.getPathInfo();
-        // TODO-WMTSCapabilities.xml
+        // TODO-hyy 判断路径后缀WMTSCapabilities.xml
         // special simpler case for GetCapabilities
         if (path.endsWith("/service/wmts/rest/WMTSCapabilities.xml")) {
             ConveyorTile tile = new ConveyorTile(sb, null, request, response);

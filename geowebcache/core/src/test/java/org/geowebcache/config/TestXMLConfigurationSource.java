@@ -30,7 +30,7 @@ public class TestXMLConfigurationSource {
 
     protected boolean failNextRead;
     protected boolean failNextWrite;
-
+    // TODO-hyy MBTilesLayerTest执行流程 20. 创建XML配置
     public XMLConfiguration create(MockWepAppContextRule extensions, File configDir)
             throws Exception {
         GridSetBroker gridSetBroker = new GridSetBroker();
