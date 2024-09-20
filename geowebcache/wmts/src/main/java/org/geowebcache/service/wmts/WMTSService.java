@@ -52,6 +52,7 @@ import org.geowebcache.util.NullURLMangler;
 import org.geowebcache.util.ServletUtils;
 import org.geowebcache.util.URLMangler;
 
+// TODO-hyy WMTS服务 Bean
 public class WMTSService extends Service {
 
     public static final String SERVICE_WMTS = "wmts";
@@ -226,11 +227,11 @@ public class WMTSService extends Service {
                 return conveyor;
             }
         }
-
+        // TODO-hyy wmts-rest路径
         if (request.getPathInfo() != null && request.getPathInfo().contains("service/wmts/rest")) {
             return getRestConveyor(request, response);
         }
-
+        // TODO-hyy wmts-kvp路径
         String[] keys = {
             "layer",
             "request",
@@ -254,7 +255,7 @@ public class WMTSService extends Service {
     public Conveyor getRestConveyor(HttpServletRequest request, HttpServletResponse response)
             throws GeoWebCacheException, OWSException {
         final String path = request.getPathInfo();
-
+        // TODO-WMTSCapabilities.xml
         // special simpler case for GetCapabilities
         if (path.endsWith("/service/wmts/rest/WMTSCapabilities.xml")) {
             ConveyorTile tile = new ConveyorTile(sb, null, request, response);
@@ -262,7 +263,7 @@ public class WMTSService extends Service {
             tile.setRequestHandler(ConveyorTile.RequestHandler.SERVICE);
             return tile;
         }
-
+        // TODO-hyy KVP正则匹配
         // all other paths are handled via the RestRequest enumeration, matching patterns and
         // extracting variables
         for (RestRequest restRequest : RestRequest.values()) {
@@ -322,7 +323,7 @@ public class WMTSService extends Service {
                 }
             }
         }
-
+        // TODO-hyy 转发请求方法
         if (req.equals(GET_TILE)) {
             if (isCitecompliant) {
                 boolean isRestRequest = isRestRequest(request);

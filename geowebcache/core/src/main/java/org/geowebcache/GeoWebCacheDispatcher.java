@@ -167,7 +167,7 @@ public class GeoWebCacheDispatcher extends AbstractController {
      */
     private Map<String, Service> loadServices() {
         LOG.info("Loading GWC Service extensions...");
-
+        // TODO-hyy 获取扩展，服务列表
         List<Service> plugins = GeoWebCacheExtensions.extensions(Service.class);
         Map<String, Service> services = new HashMap<>();
         // Give all service objects direct access to the tileLayerDispatcher
@@ -259,6 +259,7 @@ public class GeoWebCacheDispatcher extends AbstractController {
      *
      * <p>If a tile is requested the request will be handed off to handleServiceRequest.
      */
+    // TODO-hyy 分发请求
     @Override
     protected ModelAndView handleRequestInternal(
             HttpServletRequest request, HttpServletResponse originalResponse) throws Exception {
@@ -285,7 +286,7 @@ public class GeoWebCacheDispatcher extends AbstractController {
             if (requestComps == null || requestComps[0].equalsIgnoreCase(TYPE_HOME)) {
                 handleFrontPage(request, response);
             } else if (requestComps[0].equalsIgnoreCase(TYPE_SERVICE)) {
-                handleServiceRequest(requestComps[1], request, response);
+                handleServiceRequest(requestComps[1], request, response); // TODO-hyy 转发服务请求
             } else if (requestComps[0].equalsIgnoreCase(TYPE_DEMO)
                     || requestComps[0].equalsIgnoreCase(TYPE_DEMO + "s")) {
                 handleDemoRequest(requestComps[1], request, response);
@@ -390,6 +391,7 @@ public class GeoWebCacheDispatcher extends AbstractController {
     }
 
     /** This is the main method for handling service requests. See comments in the code. */
+    // TODO-hyy OGC请求
     private void handleServiceRequest(
             String serviceStr, HttpServletRequest request, HttpServletResponse response)
             throws Exception {
@@ -446,6 +448,7 @@ public class GeoWebCacheDispatcher extends AbstractController {
      *
      * @param serviceStr name of the service
      */
+    // TODO-hyy 找服务
     private Service findService(String serviceStr) throws GeoWebCacheException {
         if (this.services == null) {
             this.services = loadServices();

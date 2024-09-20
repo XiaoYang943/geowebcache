@@ -19,8 +19,11 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
-import java.util.Arrays;
+import cn.hutool.core.lang.Console;
+import java.io.IOException;
+import java.util.*;
 import org.geowebcache.config.DefaultGridsets;
+import org.geowebcache.io.XMLBuilder;
 import org.hamcrest.CoreMatchers;
 import org.junit.Test;
 
@@ -46,6 +49,77 @@ public class DefaultGridSetsTest {
         assertNotNull("GridSetBroker missing default mercator GridSet", defaultMercatorGridSet);
         assertEquals(
                 "Unexpected default mercator GridSet", epsg3857GridSet, defaultMercatorGridSet);
+    }
+
+    @Test
+    public void testXMLGridSet() throws IOException {
+
+        StringBuilder str = new StringBuilder();
+        XMLBuilder xml = new XMLBuilder(str);
+
+        final DefaultGridsets defaultGridSets = new DefaultGridsets(false, true);
+        // create a GirdSetBroker with the defaults
+        final GridSetBroker broker = new GridSetBroker(Arrays.asList(defaultGridSets));
+        Set<GridSet> usedGridsets = new HashSet<>();
+
+        List<GridSet> capabilitiesGridsets = new ArrayList<>(broker.getGridSets());
+        capabilitiesGridsets.retainAll(usedGridsets);
+        // sorting makes it easier to find a gridset now that levels do not repeat the gridset name
+        capabilitiesGridsets.sort(Comparator.comparing(GridSet::getName));
+        for (GridSet gset : capabilitiesGridsets) {
+            tileMatrixSet(xml, gset);
+        }
+        Console.log(xml.toString());
+    }
+
+    private void tileMatrixSet(XMLBuilder xml, GridSet gridSet) throws IOException {
+        xml.indentElement("TileMatrixSet");
+        xml.simpleElement("ows:Identifier", gridSet.getName(), true);
+        // If the following is not good enough, please get in touch and we will try to fix it :)
+        xml.simpleElement(
+                "ows:SupportedCRS", "urn:ogc:def:crs:EPSG::" + gridSet.getSrs().getNumber(), true);
+        // TODO detect these str.append("
+        // <WellKnownScaleSet>urn:ogc:def:wkss:GlobalCRS84Pixel</WellKnownScaleSet>\n");
+        for (int i = 0; i < gridSet.getNumLevels(); i++) {
+            double[] tlCoordinates = gridSet.getOrderedTopLeftCorner(i);
+            tileMatrix(
+                    xml,
+                    gridSet.getGrid(i),
+                    tlCoordinates,
+                    gridSet.getTileWidth(),
+                    gridSet.getTileHeight(),
+                    gridSet.isScaleWarning());
+        }
+        xml.endElement("TileMatrixSet");
+    }
+
+    private void tileMatrix(
+            XMLBuilder xml,
+            Grid grid,
+            double[] tlCoordinates,
+            int tileWidth,
+            int tileHeight,
+            boolean scaleWarning)
+            throws IOException {
+        xml.indentElement("TileMatrix");
+        if (scaleWarning) {
+            xml.simpleElement(
+                    "ows:Abstract",
+                    "The grid was not well-defined, the scale therefore assumes 1m per map unit.",
+                    true);
+        }
+        xml.simpleElement("ows:Identifier", grid.getName(), true);
+        xml.simpleElement("ScaleDenominator", Double.toString(grid.getScaleDenominator()), true);
+        xml.indentElement("TopLeftCorner")
+                .text(Double.toString(tlCoordinates[0]))
+                .text(" ")
+                .text(Double.toString(tlCoordinates[1]))
+                .endElement();
+        xml.simpleElement("TileWidth", Integer.toString(tileWidth), true);
+        xml.simpleElement("TileHeight", Integer.toString(tileHeight), true);
+        xml.simpleElement("MatrixWidth", Long.toString(grid.getNumTilesWide()), true);
+        xml.simpleElement("MatrixHeight", Long.toString(grid.getNumTilesHigh()), true);
+        xml.endElement("TileMatrix");
     }
 
     @Test

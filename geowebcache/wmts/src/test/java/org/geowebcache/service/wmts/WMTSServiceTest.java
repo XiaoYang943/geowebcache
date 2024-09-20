@@ -293,7 +293,7 @@ public class WMTSServiceTest {
 
         return tileLayer;
     }
-
+    // TODO-hyy 测试获取GetCapabilities
     @Test
     public void testGetCap() throws Exception {
 

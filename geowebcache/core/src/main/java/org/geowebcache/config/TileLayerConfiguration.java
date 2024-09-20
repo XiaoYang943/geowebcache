@@ -29,6 +29,7 @@ import org.geowebcache.layer.TileLayerDispatcher;
  * <p>Implementations must be singletons discoverable through {@link GeoWebCacheExtensions} (i.e.
  * spring beans)
  */
+// TODO-hyy 图层Provider
 public interface TileLayerConfiguration extends BaseConfiguration {
 
     /**

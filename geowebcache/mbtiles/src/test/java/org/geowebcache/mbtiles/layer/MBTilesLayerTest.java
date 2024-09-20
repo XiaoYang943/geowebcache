@@ -87,7 +87,7 @@ public class MBTilesLayerTest {
         makeConfigFile();
         return getConfig(extensions);
     }
-
+    // TODO-hyy Mbtiles测试数据配置文件
     private void makeConfigFile() throws Exception {
         if (configFile == null) {
             configDir = temp.getRoot();
@@ -198,7 +198,7 @@ public class MBTilesLayerTest {
         assertEquals(37L, attribs.get("IntVal"));
         assertEquals(3.25f, (Float) attribs.get("Double3"), DELTA);
     }
-
+    // TODO-hyy 从Mbtiles中获取TileJSON
     @Test
     public void testTileJson() {
         MBTilesLayer mbTilesLayer = (MBTilesLayer) config.getLayer("testName").get();

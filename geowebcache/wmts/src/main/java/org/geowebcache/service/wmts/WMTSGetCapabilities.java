@@ -128,7 +128,7 @@ public class WMTSGetCapabilities {
             log.fine("Caught IOException" + ioe.getMessage());
         }
     }
-
+    // TODO-hyy 生成Capabilities
     private String generateGetCapabilities(Charset encoding) {
         StringBuilder str = new StringBuilder();
         XMLBuilder xml = new XMLBuilder(str);

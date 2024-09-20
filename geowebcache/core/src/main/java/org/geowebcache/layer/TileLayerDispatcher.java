@@ -51,6 +51,7 @@ import org.springframework.util.Assert;
 /**
  * Serves tile layers from the {@link TileLayerConfiguration}s available in the application context.
  */
+// TODO-hyy 瓦片图层分发器
 public class TileLayerDispatcher
         implements DisposableBean,
                 InitializingBean,

@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /** Top-level dispatcher controller */
+// TODO-hyy 顶级controller
 @Component
 @RestController
 @RequestMapping(path = "${gwc.context.suffix:}")
