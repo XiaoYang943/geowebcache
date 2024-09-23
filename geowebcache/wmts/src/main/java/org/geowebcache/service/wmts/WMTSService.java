@@ -81,7 +81,7 @@ public class WMTSService extends Service {
                     + Strings.repeat("/([^/]+)", numPathElements - 2);
         }
     }
-
+    // TODO-hyy REST接口分发
     enum RestRequest {
         // "/{layer}/{tileMatrixSet}/{tileMatrix}/{tileRow}/{tileCol}"
         TILE(buildRestPattern(5, false), RequestType.TILE, false),
